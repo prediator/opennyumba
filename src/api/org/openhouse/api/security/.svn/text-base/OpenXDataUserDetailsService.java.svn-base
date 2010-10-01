@@ -1,0 +1,86 @@
+package org.openxdata.server.security;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.openxdata.server.admin.model.Permission;
+import org.openxdata.server.admin.model.Role;
+import org.openxdata.server.admin.model.User;
+import org.openxdata.server.admin.model.exception.OpenXDataException;
+import org.openxdata.server.context.Context;
+import org.openxdata.server.service.UserService;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.GrantedAuthorityImpl;
+import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.userdetails.UserDetailsService;
+import org.springframework.security.userdetails.UsernameNotFoundException;
+
+/**
+ * OpenXData UserDetailsService - used by spring security to 
+ * retrieve user details and authenticate.
+ * 
+ * Note: the StudyManagerService.authenticate method is bypassed
+ * because Spring Security implements "remember me" functionality
+ * that requires the retrieval of user details without a password.
+ * 
+ * @author dagmar@cell-life.org.za
+ * @author Mark
+ */
+public class OpenXDataUserDetailsService implements UserDetailsService {
+    
+    private Logger log = Logger.getLogger(this.getClass());
+    
+    private UserService userService;
+
+    public UserDetails loadUserByUsername(String username) 
+    throws UsernameNotFoundException, DataAccessException {
+    	
+        OpenXDataUserDetails userDetails = null;
+        if(this.userService == null)
+        	userService = Context.getUserService();
+        
+        User user = null;
+		try {
+			user = userService.getUser(username);
+		} catch (OpenXDataException e) {
+			log.error("Error occurred in " + this.getClass() + ".loadUserByUsername(String username)" + " >>> " + e.getLocalizedMessage());
+		}
+        if (user != null) {
+            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();            	
+        	if(user.hasAdministrativePrivileges()){
+        		List<Permission> permissions = null;            		
+				try {
+					permissions = Context.getPermissionService().getPermissions();
+				} catch (OpenXDataException e) {
+					log.error("Error occurred in " + this.getClass() + ">>" + e.getLocalizedMessage());
+				}
+				
+            	if(permissions != null && permissions.size() > 0){
+                	for(Permission p : permissions){
+                		GrantedAuthority ga = new GrantedAuthorityImpl(p.getName());
+//                        log.debug("User: "+user.getName()+", GrantedAuthority: "+p.getName());
+                        authorities.add(ga);
+                	}
+            	}
+        	}
+        	else{
+                for (Role r : user.getRoles()) {
+                	List<Permission> permissions = r.getPermissions();
+                    for (Permission p : permissions) {
+                        GrantedAuthority ga = new GrantedAuthorityImpl(p.getName());
+                        log.debug("User: "+user.getName()+", GrantedAuthority: "+p.getName());
+                        authorities.add(ga);
+                    }
+                }
+        	}
+            userDetails = new OpenXDataUserDetails(user,true, true, true, true,authorities.toArray(new GrantedAuthority[authorities.size()]));
+        }
+        return userDetails;
+    }
+
+	public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+}

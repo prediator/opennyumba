@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+
+<!-- ** Ant build script for OpenHOUSE                       ** -->
+
+<project name="OpenHouse" default="dist">
+
+	<tstamp>
+		<format property="timestamp" pattern="MMM dd yyyy hh:mm aa" />
+	</tstamp>
+	
+	<!-- Environment properties -->
+    <property environment="env"/>
+    <property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+	
+	<!-- Library versions and JARs -->
+    <property name="lib.dir" location="lib" />
+    <property file="${lib.dir}/lib.properties" />
+	<fileset id="lib.files" dir="${lib.dir}">
+        <include name="**/*.jar" />
+    </fileset>
+	<path id="lib.path">
+        <fileset refid="lib.files" />
+	</path>
+	
+	<!-- Every java and xml file in the test directory -->
+	<fileset id="test.files" dir="${test.dir}" description="All files in /test/">
+		<include name="**/*" />
+	</fileset>
+	
+	<!-- Base definitions (cannot be overwritten by user property file) -->
+	<property file="build.properties" />
+
+	
+	<!-- Taskdefs -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<fileset dir="${lib.dir}" includes="ant-contrib-1.0b2.jar" />
+		</classpath>
+	</taskdef>
+	
+	<!-- import default properties -->
+	<import file="properties.xml" />
+	
+	<!-- *********************************************************** -->
+	<!-- **                     TARGETS                           ** -->
+	<!-- *********************************************************** -->
+	<target name="init" description="initialization">
+
+		<property 
+			name="openhouse.version.long" 
+			value="${version.major}.${version.minor}.${version.maintenance} Build ${version.revision}"/>
+		<property 
+			name="openhouse.version.short" 
+			value="${version.major}.${version.minor}.${version.maintenance}.${version.revision}"/>
+		<echo message="version: ${openhouse.version.long}"/>
+		<property 
+			name="openhouse.api.name" 
+			value="openhouse-api-${openhouse.version.short}.jar"/>
+		
+		<!-- These variables are replaced in the web.xml file during compilation 
+			  and then read in by org.openhouse.web.Listener at openhouse startup -->
+		<filterset id="web.xml.variables.to.replace">
+			<filter token="WEBAPP.DISPLAY.NAME" value="${webapp.display.name}" />
+			<filter token="WEBAPP.DESCRIPTION" value="${webapp.description}" />
+			<filter token="TIMESTAMP" value="${timestamp}" />
+		</filterset>
+		<!-- Other variables are put in the jar manifest file to be read in 
+			 during object construction -->
+	</target>
+
+	<target name="clean" description="Delete build and dist directories">
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${doc.dir}" />
+	</target>
+
+	<target name="compile-api" depends="init" description="compile api">
+		<mkdir dir="${build.dir}" />
+		<!-- Copy hibernate metadata and logging settings to build directory -->
+		<copy todir="${build.dir}">
+			<fileset dir="${metadata.dir}/api/hibernate" includes="**/*" />
+			<fileset dir="${metadata.dir}/api/spring" includes="applicationContext*.xml" />
+			<fileset dir="${metadata.dir}/api/log4j" includes="log4j.*" />
+		</copy>
+		<!-- Copy Liquibase data -->
+		<copy todir="${build.dir}/liquibase-data">
+			<fileset dir="${metadata.dir}/model" includes="**/*" />
+		</copy>
+		<javac destdir="${build.dir}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" classpathref="api.compile.classpath">
+			<compilerarg line="${compile.arguments}" />
+			<src path="${src.dir}/api" />
+		</javac>
+	</target>
+
+	<target name="package-api" depends="compile-api" description="create api jar">
+		<mkdir dir="${dist.dir}" />
+		<jar destfile="${dist.dir}/${openhouse.api.name}">
+			<manifest>
+				<attribute name="Class-Path" value="${openhouse.api.name}" />
+				<attribute name="Build-Timestamp" value="${timestamp}" />
+				
+				<!-- Build properties for OpenHouseConstants to pick up -->
+				<section name="org/openhouse/util/">
+					<attribute name="Package-Title" value="org.openhouse.util"/>
+					
+					<attribute name="Specification-Title" value="OpenHouse Build Version and Short Version"/>
+					<attribute name="Specification-Vendor" value="${openhouse.version.long}"/>
+					<attribute name="Specification-Version" value="${openhouse.version.short}"/>
+					
+					<attribute name="Implementation-Title" value="OpenHouse Expected Database Version"/>
+					<attribute name="Implementation-Version" value="${openhouse.database.version.expected}"/>
+				</section>
+			</manifest>
+			<fileset dir="${build.dir}">
+				<include name="**/*"/>
+				<exclude name="**/web/**" />
+				<exclude name="**/include/" /> 
+				<exclude name="log4j*" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="compile-web" depends="package-api" description="compile webapp">
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="${src.dir}/web" destdir="${build.dir}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" 
+			deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+			<compilerarg line="${compile.arguments}" />
+			<classpath>
+				<path refid="web.compile.classpath" />
+				<path location="${dist.dir}/${openhouse.api.name}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- 
+		TODO: The 'deploy' target doesn't work all that well with our setup for some reason.  	
+	-->
+    <target name="deploy" depends="package-web" if="tomcat.home" description="Move war into the tomcat's webapps directory - ">
+		<echo message="Deploying webapp to Tomcat.  NOTE: The 'deploy' target is not working as expected yet."/>
+        <copy todir="${tomcat.home}/webapps" file="${dist.dir}/${webapp.name}.war"/>
+    </target>
+	
+	<target name="undeploy" if="tomcat.home" description="undeploy war file to servlet container's deployment dir">
+		<echo message="Undeploying webapp from Tomcat"/>
+		<delete file="${tomcat.home}/webapps/${webapp.name}.war"/>
+		<delete dir="${tomcat.home}/webapps/${webapp.name}"/>
+    </target>
+	
+	<target name="deploy-web" description="standalone copy web target">
+		<copy todir="${env.CATALINA_HOME}/webapps/${webapp.name}">
+			<fileset dir="web">
+				<include name="**/*.jsp"/>
+				<include name="**/*.tag"/>
+				<include name="**/*.css"/>
+				<include name="**/*.js"/>
+				<include name="**/*.withjstl"/>
+				<include name="**/*.tag"/>
+				<include name="**/messages*.properties"/>
+				<include name="**/*_theme*.properties"/>
+				<include name="**/images/**/*" />
+				<!-- This fileset doesn't exclude /web/test so that 
+					 developers can easily test files -->
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="package-web-init" depends="compile-web" description="start creation of webapp. Use package-web for complete">
+		<mkdir dir="${dist.dir}/web" />
+		
+		<!-- copy the web.xml file to the dist folder (for variable replacement) -->
+		<copy todir="${dist.dir}/web" preservelastmodified="true" overwrite="true">
+			<fileset file="web/WEB-INF/web.xml" />
+			<filterset refid="web.xml.variables.to.replace" />
+		</copy>
+		
+		<property name="libs-zipped-temp" value="${dist.dir}/web/temp-war-libs-zipped.zip" />
+		<zip destfile="${libs-zipped-temp}">
+			
+			<!-- NOTE: You must do an ant "clean" after changing these libraries -->
+			
+			<zipfileset dir="${lib.dir}" includes="*.jar" />
+		</zip>
+		
+	</target>
+	
+	<target name="package-web" depends="package-web-init" description="create webapp war file">
+		<war destfile="${dist.dir}/${webapp.name}.war" basedir="web" excludes="**/web.xml, **/test/" webxml="${dist.dir}/web/web.xml" duplicate="add">
+			<classes dir="${build.dir}">
+				<include name="**/web/**/*.class" />
+				<include name="log4j.xml" />
+			</classes>
+			<classes dir="${build.dir}/liquibase-data">
+				<include name="*" /> <!-- for the initial setup files: liquibase-schema-only.xml, liquibase-core-data.xml, liquibase-demo-data.xml-->
+			</classes>
+			<classes dir="web/WEB-INF">
+				<include name="*_theme*.properties"/>
+			</classes>
+			<lib file="${dist.dir}/${openhouse.api.name}" />
+			<lib src="${libs-zipped-temp}" />
+		</war>
+		<delete dir="${dist.dir}/web" />
+	</target>
+
+	
+	<target name="dist" depends="package-web" description="create distribution packages" />
+	
+</project>

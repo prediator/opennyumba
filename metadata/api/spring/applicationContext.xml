@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Application context definition for openhouse services. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+    
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+	<bean class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+		<property name="transactionInterceptor" ref="transactionInterceptor"/>
+	</bean>
+	
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributeSource"><ref local="transactionAttributeSource" /></property>
+	</bean>
+	
+	<bean id="transactionAttributeSource" class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+	
+    <!--  **************************  DATA OBJECTS CONFIGURATION  *************************  -->
+	
+	<bean id="contextDAO" class="org.openhouse.api.dao.hibernate.HibernateContextDAO">
+		<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
+	</bean>
+	
+	<bean id="userDAO" class="org.openhouse.api.dao.hibernate.HibernateUserDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="locationDAO" class="org.openhouse.api.dao.hibernate.HibernateLocationDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="taskDAO" class="org.openhouse.api.dao.hibernate.HibernateTaskDAO"/>
+	
+	<!--  **************************  SERVICE CONFIGURATION  *************************  -->
+	
+	<!-- Single application context (our own context, not Spring's ApplicationContext) -->
+	<bean id="serviceContext" class="org.openhouse.api.context.ServiceContext" factory-method="getInstance">
+        <property name="userService"><ref bean="userService"/></property> 
+        <property name="taskService"><ref bean="taskService"/></property>
+        <property name="schedulerService"><ref bean="schedulerService"/></property> 
+        <property name="authenticationService"><ref bean="authenticationService"/></property>  
+        <property name="locationService"><ref bean="locationService"/></property>      
+	</bean>	
+	
+	<bean class="org.openhouse.api.context.Context">
+	    <property name="contextDAO"><ref bean="contextDAO"/></property>
+		<property name="serviceContext"><ref bean="serviceContext"/></property>
+	</bean>
+	
+	<bean id="schedulerService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target">
+            <bean class="org.openhouse.api.service.impl.SchedulerServiceImpl" />
+        </property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+
+	<bean id="authenticationService" class="org.openhouse.api.service.impl.AuthenticationServiceImpl" />
+	
+	<bean id="taskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target">
+            <bean class="org.openhouse.api.service.impl.TaskServiceImpl">
+                <property name="dao" ref="taskDAO"/>
+            </bean>
+        </property>
+		<property name="transactionAttributeSource">
+			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+		</property>
+	</bean>
+	
+    <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+       <property name="transactionManager" ref="transactionManager"/>
+       <property name="target">
+            <bean id="userServiceTarget" class="org.openhouse.api.service.impl.UserServiceImpl">
+                <property name="dao" ref="userDAO"/>
+                <property name="contextDao" ref="contextDAO"/>
+            </bean>
+       </property>
+       <property name="transactionAttributeSource">
+           <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+       </property>       
+    </bean >
+    
+    <bean id="locationService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+       <property name="transactionManager" ref="transactionManager"/>
+       <property name="target">
+            <bean class="org.openhouse.api.service.impl.LocationServiceImpl">
+                <property name="dao" ref="locationDAO"/>
+            </bean>
+       </property>
+       <property name="transactionAttributeSource">
+           <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+       </property>       
+    </bean >
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="en_GB" />
+	</bean>
+    
+    <!--  **************************  SESSION FACTORY  *************************  -->
+    
+    <bean id="sessionFactory" class="org.openhouse.api.dao.hibernate.HibernateSessionFactoryBean" autowire="byType">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+	
+	<bean class="org.openhouse.util.HibernateUtil">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+
+	<!--  **************************  TRANSACTION MANAGER CONFIGURATION  *************************  -->
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+</beans>

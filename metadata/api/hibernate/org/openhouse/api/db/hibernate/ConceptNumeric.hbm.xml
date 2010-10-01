@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.ConceptNumeric" table="concept_numeric" catalog="openhouse">
+        <comment></comment>
+        <id name="conceptId" type="int">
+            <column name="concept_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="hiAbsolute" type="java.lang.Double">
+            <column name="hi_absolute" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="hiCritical" type="java.lang.Double">
+            <column name="hi_critical" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="hiNormal" type="java.lang.Double">
+            <column name="hi_normal" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="lowAbsolute" type="java.lang.Double">
+            <column name="low_absolute" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="lowCritical" type="java.lang.Double">
+            <column name="low_critical" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="lowNormal" type="java.lang.Double">
+            <column name="low_normal" precision="22" scale="0">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="units" type="string">
+            <column name="units" length="50">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="precise" type="short">
+            <column name="precise" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="36" not-null="true" unique="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

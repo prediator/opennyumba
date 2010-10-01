@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.GroupMap" table="group_map" catalog="openhouse">
+        <comment></comment>
+        <id name="groupMapId" type="int">
+            <column name="group_map_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupMapType" type="java.lang.Integer">
+            <column name="group_map_type">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="group1" type="int">
+            <column name="group1" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="group2" type="int">
+            <column name="group2" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

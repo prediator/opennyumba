@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="properties">
+
+   	<!--  Webapp properties -->
+	<property name="webapp.name" value="openhouse" />
+	<property name="webapp.version" value="${openhouse.version}" />
+	<property name="webapp.display.name" value="OpenHOUSE" />
+	<property name="webapp.description" value="An Open-Source Household Registration System" />
+	
+    <!-- Hibernate -->
+    <path id="hibernate.classpath">
+    	<fileset dir="${lib.dir}" includes="*.jar" />
+        <pathelement location="${build.dir}/api" />
+    </path>
+
+	<!-- API -->
+    <path id="api.compile.classpath">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+    </path>
+        
+    <!-- Web -->
+    <path id="web.compile.classpath">
+		<pathelement location="${dist.dir}/openhouse-api-${openhouse.version}.jar" />
+		<fileset dir="${lib.dir}" includes="*.jar" />
+    	<fileset dir="${lib-common.dir}" includes="*.jar" />
+    </path>
+
+</project>

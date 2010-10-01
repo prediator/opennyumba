@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/!svn/ver/9436/openmrs/trunk/web/WEB-INF/taglibs
+END
+openmrs.tld
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/9436/openmrs/trunk/web/WEB-INF/taglibs/openmrs.tld
+END
+fn.tld
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/fn.tld
+END
+c-rt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/c-rt.tld
+END
+spring.tld
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/spring.tld
+END
+request.tld
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/request.tld
+END
+page.tld
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/page.tld
+END
+response.tld
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/4095/openmrs/trunk/web/WEB-INF/taglibs/response.tld
+END

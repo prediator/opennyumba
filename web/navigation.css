@@ -1,0 +1,67 @@
+ul.coolMenu, ul.coolMenu ul { margin: 0px; padding: 0px; }
+
+ul.coolMenu * { line-height: normal !important; } /* overriding my normal stylesheet */
+
+ul.coolMenu, ul.coolMenu ul { width: 180px; padding-left: 0px; cursor: pointer; margin-left: 0px; }
+ul.coolMenu { 
+	float: right; 
+	margin-left: 1em; 
+}
+ul.coolMenu li { 
+	list-style-type: none; 
+	margin: 0px; 
+	position: relative; 
+	color: #f90; 
+	padding-top: 3px; 
+	padding-bottom: 3px;
+	background-color: #efefef; 
+	padding-left:10px;
+	margin-bottom: 2px;
+	border: 1px solid #f90; 
+	-moz-border-radius: 5px;
+	font-size: 1.2em; 
+}
+ul.coolMenu li > ul { 
+	display: none; 
+	position: absolute; 
+	top: 2px; 
+	left: 180px; 
+}
+ul.coolMenu li:hover, ul.coolMenu li.CSStoHighlight { 
+	background-color: #ffd; 
+}
+ul.coolMenu ul.CSStoShow { 
+	display: block; 
+}
+ul.coolMenu li:hover > ul { 
+	display: block; 
+}
+ul.coolMenu li a { 
+	color: #f90; 
+	display: block; 
+	width: 100%; 
+	text-decoration: none; 
+}
+ul.coolMenu li a:hover { 
+	color: #f90; 
+}
+
+
+#coolMenu2 {width:180px; font-size:12px;}
+
+#coolMenu2 ul {margin:0px; padding:0px; background-color:#efefef;}
+
+#coolMenu2 ul li {
+	width: 180px;
+	height:25px;
+	line-height:25px; 
+	list-style:none; 
+	padding-left:10px;
+	
+	border-top:#fff solid; 
+	border-bottom:#fff solid; 
+	border-width:1px;
+	cursor:pointer;
+	font-size: 1.4em;
+}
+#coolMenu2 ul li:hover {background-color:#F90; position:relative;}

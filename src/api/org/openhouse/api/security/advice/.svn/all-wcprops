@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/EpiHandy/!svn/ver/1170/trunk/Server/openxdata%20server/src/org/openxdata/server/security/advice
+END
+UserExceptionAdvice.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/EpiHandy/!svn/ver/1170/trunk/Server/openxdata%20server/src/org/openxdata/server/security/advice/UserExceptionAdvice.java
+END
+SecurityExceptionAdvice.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/EpiHandy/!svn/ver/1070/trunk/Server/openxdata%20server/src/org/openxdata/server/security/advice/SecurityExceptionAdvice.java
+END

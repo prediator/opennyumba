@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.GroupMembership" table="group_membership" catalog="openhouse">
+        <comment></comment>
+        <id name="groupMembershipId" type="int">
+            <column name="group_membership_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupId" type="java.lang.Integer">
+            <column name="group_id">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="personId" type="java.lang.Integer">
+            <column name="person_id">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="groupMembershipType" type="int">
+            <column name="group_membership_type" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="start_date" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="end_date" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="creator" type="java.lang.Integer">
+            <column name="creator">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateCreated" type="timestamp">
+            <column name="date_created" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voided" type="java.lang.Integer">
+            <column name="voided">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voidedBy" type="java.lang.Integer">
+            <column name="voided_by">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateVoided" type="timestamp">
+            <column name="date_voided" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voidReason" type="string">
+            <column name="void_reason">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="36" not-null="true" unique="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

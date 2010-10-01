@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.8" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.8 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.8.xsd">
+    <changeSet author="ben" id="disable-foreign-key-checks" runAlways="true" dbms="mysql">
+	<sql>SET FOREIGN_KEY_CHECKS=0</sql>
+    </changeSet>
+
+    <changeSet author="samuel mbugua" id="openhouse-1">
+        <insert tableName="global_property">
+            <column name="property" value="database_version"/>
+            <column name="property_value" value="1.4.0.20"/>
+            <column name="description"/>
+        </insert>
+    </changeSet>
+    <changeSet author="samuel mbugua" id="openhouse-2">
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Concept Classes"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Concept Datatypes"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Encounter Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Field Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Global Properties"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Identifier Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Locations"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Mime Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Order Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Person Attribute Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Privileges"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Relationship Types"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Relationships"/>
+        </insert>
+        <insert tableName="role_privilege">
+            <column name="role" value="Authenticated"/>
+            <column name="privilege" value="View Roles"/>
+        </insert>
+    </changeSet>
+    <changeSet author="samuel mbugua" id="openhouse-3">
+        <insert tableName="role">
+            <column name="role" value="System Developer"/>
+            <column name="description" value="Developers of the OpenHouse .. have additional access to change fundamental structure of the database model."/>
+        </insert>
+    </changeSet>
+    <changeSet author="samuel mbugua" id="openhouse-4">
+        <insert tableName="users">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="system_id" value="admin"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="4a1750c8607dfa237de36c6305715c223415189"/>
+            <column name="salt" value="c788c6ad82a157b712392ca695dfcf2eed193d7f"/>
+            <column name="secret_question"/>
+            <column name="secret_answer"/>
+            <column name="creator" valueNumeric="1"/>
+            <column name="date_created" valueDate="2010-04-01"/>
+            <column name="changed_by"/>
+            <column name="date_changed"/>
+            <column name="voided" valueNumeric="0"/>
+            <column name="voided_by"/>
+            <column name="date_voided"/>
+            <column name="void_reason"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="samuel mbugua" id="openhouse-5">
+        <insert tableName="user_role">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="role" value="System Developer"/>
+        </insert>
+    </changeSet>
+    <changeSet author="samuel mbugua" id="openhouse-6">
+        <insert tableName="person">
+            <column name="person_id" valueNumeric="1"/>
+            <column name="person_identifier" value="1-8"/>
+            <column name="remote_person_uuid" value="uuid()" />
+            <column name="first_name" value="Super"/>
+            <column name="middle_name" value=""/>
+            <column name="last_name" value="User"/>
+            <column name="gender" value="m"/>
+            <column name="birthdate" valueDate="2010-04-01"/>
+            <column name="birthdate_estimated" valueNumeric="0"/>
+            <column name="death_date"/>
+            <column name="creator" valueNumeric="1"/>
+            <column name="date_created" valueDate="2010-04-01"/>
+            <column name="changed_by"/>
+            <column name="date_changed"/>
+            <column name="voided" valueNumeric="0"/>
+            <column name="voided_by"/>
+            <column name="date_voided"/>
+            <column name="void_reason"/>
+        </insert>
+    </changeSet>
+    <changeSet author="samuel mbugua" id="openhouse-7">
+        <insert tableName="location">
+            <column name="location_id" valueNumeric="1"/>
+            <column name="name" value="Unknown Location"/>
+            <column name="description"/>
+            <column name="address1" value=""/>
+            <column name="address2" value=""/>
+            <column name="city_village" value=""/>
+            <column name="state_province" value=""/>
+            <column name="postal_code" value=""/>
+            <column name="country" value=""/>
+            <column name="latitude"/>
+            <column name="longitude"/>
+            <column name="creator" valueNumeric="1"/>
+            <column name="date_created" valueDate="2005-09-22"/>
+            <column name="county_district"/>
+            <column name="neighborhood_cell"/>
+            <column name="region"/>
+            <column name="subregion"/>
+            <column name="township_division"/>
+            <column name="retired" valueNumeric="0"/>
+            <column name="retired_by"/>
+            <column name="date_retired"/>
+            <column name="retire_reason"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

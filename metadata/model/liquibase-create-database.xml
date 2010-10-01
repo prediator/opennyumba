@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet author="Samuel Mbugua" id="openhouse-1">
+        <createTable tableName="concept">
+            <column autoIncrement="true" name="concept_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_name" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="form_text" type="TEXT"/>
+            <column defaultValueNumeric="0" name="datatype_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="class_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="is_set" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="default_charge" type="INT"/>
+            <column name="version" type="VARCHAR(50)"/>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-2">
+        <createTable tableName="concept_answer">
+            <column autoIncrement="true" name="concept_answer_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="concept_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="answer_concept" type="INT"/>
+            <column name="answer_drug" type="INT"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-3">
+        <createTable tableName="concept_class">
+            <column autoIncrement="true" name="concept_class_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-4">
+        <createTable tableName="concept_complex">
+            <column name="concept_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="handler" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-5">
+        <createTable tableName="concept_datatype">
+            <column autoIncrement="true" name="concept_datatype_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hl7_abbreviation" type="VARCHAR(3)"/>
+            <column defaultValue="" name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-6">
+        <createTable tableName="concept_description">
+            <column autoIncrement="true" name="concept_description_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="concept_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="locale" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-7">
+        <createTable tableName="concept_name">
+            <column autoIncrement="true" name="concept_name_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="concept_id" type="INT"/>
+            <column defaultValue="" name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="locale" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="voided" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-8">
+        <createTable tableName="concept_name_tag">
+            <column autoIncrement="true" name="concept_name_tag_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tag" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="voided" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-9">
+        <createTable tableName="concept_name_tag_map">
+            <column name="concept_name_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="concept_name_tag_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-10">
+        <createTable tableName="concept_numeric">
+            <column defaultValueNumeric="0" name="concept_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="hi_absolute" type="DOUBLE"/>
+            <column name="hi_critical" type="DOUBLE"/>
+            <column name="hi_normal" type="DOUBLE"/>
+            <column name="low_absolute" type="DOUBLE"/>
+            <column name="low_critical" type="DOUBLE"/>
+            <column name="low_normal" type="DOUBLE"/>
+            <column name="units" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="precise" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-11">
+        <createTable tableName="concept_set">
+            <column autoIncrement="true" name="concept_set_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValueNumeric="0" name="concept_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="concept_set" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_weight" type="DOUBLE"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-12">
+        <createTable tableName="encounter">
+            <column autoIncrement="true" name="encounter_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="encounter_type" type="INT"/>
+            <column defaultValueNumeric="0" name="group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="location_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="form_id" type="INT"/>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="encounter_datetime" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="voided" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-13">
+        <createTable tableName="encounter_type">
+            <column autoIncrement="true" name="encounter_type_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-14">
+        <createTable tableName="global_property">
+            <column defaultValue="" name="property" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="property_value" type="MEDIUMTEXT"/>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-15">
+        <createTable tableName="group">
+            <column autoIncrement="true" name="group_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_type" type="INT"/>
+            <column name="location" type="INT"/>
+            <column name="creator" type="INT"/>
+            <column name="date_created" type="DATETIME"/>
+            <column name="voided" type="BIT"/>
+            <column name="voided_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-16">
+        <createTable tableName="group_map">
+            <column name="group_map_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_map_type" type="INT"/>
+            <column name="group1" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group2" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-17">
+        <createTable tableName="group_map_type">
+            <column name="group_map_type_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-18">
+        <createTable tableName="group_membership">
+            <column name="group_membership_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_id" type="INT"/>
+            <column name="person_id" type="INT"/>
+            <column name="group_membership_type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="DATETIME"/>
+            <column name="end_date" type="DATETIME"/>
+            <column name="creator" type="INT"/>
+            <column name="date_created" type="DATETIME"/>
+            <column name="voided" type="BIT"/>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-19">
+        <createTable tableName="group_membership_type">
+            <column name="group_membership_type_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-20">
+        <createTable tableName="group_type">
+            <column name="group_type_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="creator" type="INT"/>
+            <column name="date_created" type="DATETIME"/>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-21">
+        <createTable tableName="location">
+            <column autoIncrement="true" name="location_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="parent_location_id" type="INT"/>
+            <column defaultValue="" name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="address1" type="VARCHAR(50)"/>
+            <column name="address2" type="VARCHAR(50)"/>
+            <column name="city_village" type="VARCHAR(50)"/>
+            <column name="state_province" type="VARCHAR(50)"/>
+            <column name="postal_code" type="VARCHAR(50)"/>
+            <column name="country" type="VARCHAR(50)"/>
+            <column name="county_district" type="VARCHAR(50)"/>
+            <column name="township_division" type="VARCHAR(50)"/>
+            <column name="neighborhood_cell" type="VARCHAR(50)"/>
+            <column name="region" type="VARCHAR(50)"/>
+            <column name="subregion" type="VARCHAR(50)"/>
+            <column name="latitude" type="VARCHAR(50)"/>
+            <column name="longitude" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-22">
+        <createTable tableName="location_tag">
+            <column autoIncrement="true" name="location_tag_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="tag" type="VARCHAR(50)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="retired" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="retired_by" type="INT"/>
+            <column name="date_retired" type="DATETIME"/>
+            <column name="retire_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-23">
+        <createTable tableName="location_tag_map">
+            <column name="location_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_tag_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-24">
+        <createTable tableName="note">
+            <column defaultValueNumeric="0" name="note_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="note_type" type="VARCHAR(50)"/>
+            <column name="patient_id" type="INT"/>
+            <column name="obs_id" type="INT"/>
+            <column name="encounter_id" type="INT"/>
+            <column name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="priority" type="INT"/>
+            <column name="parent" type="INT"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-25">
+        <createTable tableName="obs">
+            <column autoIncrement="true" name="obs_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="group_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="encounter_id" type="INT"/>
+            <column defaultValueNumeric="0" name="concept_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="obs_datetime" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="obs_group_id" type="INT"/>
+            <column name="accession_number" type="VARCHAR(255)"/>
+            <column name="value_group_id" type="INT"/>
+            <column name="value_coded" type="INT"/>
+            <column name="value_coded_name_id" type="INT"/>
+            <column name="value_complex" type="VARCHAR(255)"/>
+            <column name="value_datetime" type="DATETIME"/>
+            <column name="value_numeric" type="DOUBLE"/>
+            <column name="value_modifier" type="VARCHAR(2)"/>
+            <column name="value_text" type="TEXT"/>
+            <column name="date_started" type="DATETIME"/>
+            <column name="date_stopped" type="DATETIME"/>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="voided" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-26">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="person_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="person_identifier" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remote_person_id" type="INT"/>
+            <column name="remote_person_uuid" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="middle_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column defaultValue="" name="gender" type="VARCHAR(10)"/>
+            <column name="birthdate" type="DATE"/>
+            <column defaultValueNumeric="0" name="birthdate_estimated" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="death_date" type="DATETIME"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="2010-01-01T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column defaultValueNumeric="0" name="voided" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="INT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-27">
+        <createTable tableName="privilege">
+            <column defaultValue="" name="privilege" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="description" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-28">
+        <createTable tableName="role">
+            <column defaultValue="" name="role" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-29">
+        <createTable tableName="role_privilege">
+            <column defaultValue="" name="role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="privilege" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-30">
+        <createTable tableName="role_role">
+            <column defaultValue="" name="parent_role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="child_role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-31">
+        <createTable tableName="scheduler_task_config">
+            <column autoIncrement="true" name="task_config_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1024)"/>
+            <column name="schedulable_class" type="TEXT"/>
+            <column name="start_time" type="DATETIME"/>
+            <column name="start_time_pattern" type="VARCHAR(50)"/>
+            <column defaultValueNumeric="0" name="repeat_interval" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="start_on_startup" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="started" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="created_by" type="INT"/>
+            <column defaultValueDate="2005-01-01T00:00:00.0" name="date_created" type="DATETIME"/>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-32">
+        <createTable tableName="scheduler_task_config_property">
+            <column autoIncrement="true" name="task_config_property_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="TEXT"/>
+            <column name="task_config_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-33">
+        <createTable tableName="user_property">
+            <column defaultValueNumeric="0" name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="property" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="property_value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-34">
+        <createTable tableName="user_role">
+            <column defaultValueNumeric="0" name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="" name="role" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-35">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="user_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="" name="system_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(50)"/>
+            <column name="password" type="VARCHAR(128)"/>
+            <column name="salt" type="VARCHAR(128)"/>
+            <column name="secret_question" type="VARCHAR(255)"/>
+            <column name="secret_answer" type="VARCHAR(255)"/>
+            <column defaultValueNumeric="0" name="creator" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueDate="0002-11-30T00:00:00.0" name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="INT"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column defaultValueNumeric="0" name="voided" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voided_by" type="BIT"/>
+            <column name="date_voided" type="DATETIME"/>
+            <column name="void_reason" type="VARCHAR(255)"/>
+            <column name="uuid" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-36">
+        <addPrimaryKey columnNames="location_id, location_tag_id" tableName="location_tag_map"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-37">
+        <addPrimaryKey columnNames="privilege, role" tableName="role_privilege"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-38">
+        <addPrimaryKey columnNames="parent_role, child_role" tableName="role_role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-39">
+        <addPrimaryKey columnNames="user_id, property" tableName="user_property"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-40">
+        <addPrimaryKey columnNames="role, user_id" tableName="user_role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-41">
+        <createIndex indexName="concept_uuid_index" tableName="concept" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-42">
+        <createIndex indexName="concept_answer_uuid_index" tableName="concept_answer" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-43">
+        <createIndex indexName="concept_class_uuid_index" tableName="concept_class" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-44">
+        <createIndex indexName="concept_datatype_uuid_index" tableName="concept_datatype" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-45">
+        <createIndex indexName="concept_description_uuid_index" tableName="concept_description" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-46">
+        <createIndex indexName="concept_name_uuid_index" tableName="concept_name" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-47">
+        <createIndex indexName="name_of_concept" tableName="concept_name" unique="false">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-48">
+        <createIndex indexName="concept_name_tag_unique_tags" tableName="concept_name_tag" unique="true">
+            <column name="tag"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-49">
+        <createIndex indexName="concept_name_tag_uuid_index" tableName="concept_name_tag" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-50">
+        <createIndex indexName="uuid_UNIQUE" tableName="concept_numeric" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-51">
+        <createIndex indexName="concept_set_uuid_index" tableName="concept_set" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-52">
+        <createIndex indexName="encounter_form" tableName="encounter" unique="false">
+            <column name="form_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-53">
+        <createIndex indexName="encounter_uuid_index" tableName="encounter" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-54">
+        <createIndex indexName="encounter_type_uuid_index" tableName="encounter_type" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-55">
+        <createIndex indexName="retired_status" tableName="encounter_type" unique="false">
+            <column name="retired"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-56">
+        <createIndex indexName="uuid_UNIQUE" tableName="group" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-57">
+        <createIndex indexName="uuid_UNIQUE" tableName="group_membership" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-58">
+        <createIndex indexName="uuid_UNIQUE" tableName="group_membership_type" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-59">
+        <createIndex indexName="uuid_UNIQUE" tableName="group_type" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-60">
+        <createIndex indexName="location_uuid_index" tableName="location" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-61">
+        <createIndex indexName="location_tag_uuid_index" tableName="location_tag" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-62">
+        <createIndex indexName="note_uuid_index" tableName="note" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-63">
+        <createIndex indexName="patient_note" tableName="note" unique="false">
+            <column name="patient_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-64">
+        <createIndex indexName="uuid_UNIQUE" tableName="obs" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-65">
+        <createIndex indexName="person_identifier_UNIQUE" tableName="person" unique="true">
+            <column name="person_identifier"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-66">
+        <createIndex indexName="uuid_UNIQUE" tableName="person" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-67">
+        <createIndex indexName="privilege_uuid_index" tableName="privilege" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-68">
+        <createIndex indexName="role_uuid_index" tableName="role" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-69">
+        <createIndex indexName="uuid_UNIQUE" tableName="user_property" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-70">
+        <createIndex indexName="uuid_UNIQUE" tableName="users" unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-71">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="concept" constraintName="user_who_changed_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-72">
+        <addForeignKeyConstraint baseColumnNames="class_id" baseTableName="concept" constraintName="concept_classes" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_class_id" referencedTableName="concept_class"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-73">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept" constraintName="user_who_created_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-74">
+        <addForeignKeyConstraint baseColumnNames="datatype_id" baseTableName="concept" constraintName="concept_datatypes" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_datatype_id" referencedTableName="concept_datatype"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-75">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="concept" constraintName="user_who_retired_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-76">
+        <addForeignKeyConstraint baseColumnNames="answer_concept" baseTableName="concept_answer" constraintName="answer" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-77">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_answer" constraintName="answers_for_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-78">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_answer" constraintName="user_who_created_concept_answer" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-79">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_class" constraintName="user_who_created_concept_class" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-80">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="concept_class" constraintName="user_who_retired_concept_class" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-81">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_complex" constraintName="concept_attributes" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-82">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_datatype" constraintName="user_who_created_concept_datatype" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-83">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="concept_datatype" constraintName="user_who_retired_concept_datatype" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-84">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="concept_description" constraintName="user_who_changed_concept_description" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-85">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_description" constraintName="fk_concept_description_concept1" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-86">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_description" constraintName="user_who_created_concept_description" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-87">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_name" constraintName="name_for_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-88">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_name" constraintName="user_who_created_concept_name" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-89">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="concept_name" constraintName="user_who_voided_concept_name" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-90">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_name_tag" constraintName="user_who_created_concept_name_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-91">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="concept_name_tag" constraintName="user_who_voided_concept_name_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-92">
+        <addForeignKeyConstraint baseColumnNames="concept_name_id" baseTableName="concept_name_tag_map" constraintName="mapped_concept_name" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_name_id" referencedTableName="concept_name"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-93">
+        <addForeignKeyConstraint baseColumnNames="concept_name_tag_id" baseTableName="concept_name_tag_map" constraintName="mapped_concept_name_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_name_tag_id" referencedTableName="concept_name_tag"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-94">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_numeric" constraintName="numeric_attributes" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-95">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="concept_set" constraintName="is_a" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-96">
+        <addForeignKeyConstraint baseColumnNames="concept_set" baseTableName="concept_set" constraintName="has_a" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-97">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="concept_set" constraintName="user_who_created_concept_set" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-98">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="encounter" constraintName="user_who_created_encounter" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-99">
+        <addForeignKeyConstraint baseColumnNames="encounter_type" baseTableName="encounter" constraintName="encounter_type_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="encounter_type_id" referencedTableName="encounter_type"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-100">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="encounter" constraintName="fk_encounter_group1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_id" referencedTableName="group"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-101">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="encounter" constraintName="encounter_location" deferrable="false" initiallyDeferred="false" referencedColumnNames="location_id" referencedTableName="location"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-102">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="encounter" constraintName="user_who_voided_encounter" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-103">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="encounter_type" constraintName="user_who_created_encounter_type" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-104">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="encounter_type" constraintName="user_who_retired_encounter_type" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-105">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group" constraintName="user_who_created_group" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-106">
+        <addForeignKeyConstraint baseColumnNames="group_type" baseTableName="group" constraintName="fk_group_group_type1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_type_id" referencedTableName="group_type"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-107">
+        <addForeignKeyConstraint baseColumnNames="location" baseTableName="group" constraintName="fk_group_location1" deferrable="false" initiallyDeferred="false" referencedColumnNames="location_id" referencedTableName="location"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-108">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="group" constraintName="user_who_voided_group" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-109">
+        <addForeignKeyConstraint baseColumnNames="group1" baseTableName="group_map" constraintName="fk_group_map_group1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_id" referencedTableName="group"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-110">
+        <addForeignKeyConstraint baseColumnNames="group2" baseTableName="group_map" constraintName="fk_group_map_group2" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_id" referencedTableName="group"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-111">
+        <addForeignKeyConstraint baseColumnNames="group_map_type" baseTableName="group_map" constraintName="type_of_group_map" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_map_type_id" referencedTableName="group_map_type"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-112">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group_membership" constraintName="user_who_created_group_membership" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-113">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_membership" constraintName="fk_group_membership_group1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_id" referencedTableName="group"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-114">
+        <addForeignKeyConstraint baseColumnNames="group_membership_type" baseTableName="group_membership" constraintName="fk_group_membership_group_membership_type1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_membership_type_id" referencedTableName="group_membership_type"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-115">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="group_membership" constraintName="fk_group_membership_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="person_id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-116">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="group_membership" constraintName="user_who_voided_group_membership" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-117">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group_membership_type" constraintName="use_who_created__group_membership_type" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-118">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="group_type" constraintName="user_who_changed_group_type" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-119">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="group_type" constraintName="user_who_created_group_type" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-120">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="location" constraintName="user_who_created_location" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-121">
+        <addForeignKeyConstraint baseColumnNames="parent_location_id" baseTableName="location" constraintName="parent_location" deferrable="false" initiallyDeferred="false" referencedColumnNames="location_id" referencedTableName="location"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-122">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="location" constraintName="user_who_retired_location" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-123">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="location_tag" constraintName="user_who_created_location_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-124">
+        <addForeignKeyConstraint baseColumnNames="retired_by" baseTableName="location_tag" constraintName="user_who_retired_location_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-125">
+        <addForeignKeyConstraint baseColumnNames="location_id" baseTableName="location_tag_map" constraintName="location_tag_map_location" deferrable="false" initiallyDeferred="false" referencedColumnNames="location_id" referencedTableName="location"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-126">
+        <addForeignKeyConstraint baseColumnNames="location_tag_id" baseTableName="location_tag_map" constraintName="location_tag_map_tag" deferrable="false" initiallyDeferred="false" referencedColumnNames="location_tag_id" referencedTableName="location_tag"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-127">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="note" constraintName="user_who_changed_note" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-128">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="note" constraintName="user_who_created_note" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-129">
+        <addForeignKeyConstraint baseColumnNames="encounter_id" baseTableName="note" constraintName="encounter_note" deferrable="false" initiallyDeferred="false" referencedColumnNames="encounter_id" referencedTableName="encounter"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-130">
+        <addForeignKeyConstraint baseColumnNames="obs_id" baseTableName="note" constraintName="obs_note" deferrable="false" initiallyDeferred="false" referencedColumnNames="obs_id" referencedTableName="obs"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-131">
+        <addForeignKeyConstraint baseColumnNames="parent" baseTableName="note" constraintName="note_hierarchy" deferrable="false" initiallyDeferred="false" referencedColumnNames="note_id" referencedTableName="note"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-132">
+        <addForeignKeyConstraint baseColumnNames="concept_id" baseTableName="obs" constraintName="obs_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-133">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="obs" constraintName="obs_enterer" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-134">
+        <addForeignKeyConstraint baseColumnNames="encounter_id" baseTableName="obs" constraintName="encounter_observations" deferrable="false" initiallyDeferred="false" referencedColumnNames="encounter_id" referencedTableName="encounter"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-135">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="obs" constraintName="fk_obs_group1" deferrable="false" initiallyDeferred="false" referencedColumnNames="group_id" referencedTableName="group"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-136">
+        <addForeignKeyConstraint baseColumnNames="obs_group_id" baseTableName="obs" constraintName="obs_grouping_id" deferrable="false" initiallyDeferred="false" referencedColumnNames="obs_id" referencedTableName="obs"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-137">
+        <addForeignKeyConstraint baseColumnNames="value_coded" baseTableName="obs" constraintName="answer_concept" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_id" referencedTableName="concept"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-138">
+        <addForeignKeyConstraint baseColumnNames="value_coded_name_id" baseTableName="obs" constraintName="obs_name_of_coded_value" deferrable="false" initiallyDeferred="false" referencedColumnNames="concept_name_id" referencedTableName="concept_name"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-139">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="obs" constraintName="user_who_voided_obs" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-140">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="person" constraintName="user_who_changed_person" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-141">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="person" constraintName="user_who_created_person" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-142">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="person" constraintName="user_who_voided_person" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-143">
+        <addForeignKeyConstraint baseColumnNames="privilege" baseTableName="role_privilege" constraintName="privilege_definitons" deferrable="false" initiallyDeferred="false" referencedColumnNames="privilege" referencedTableName="privilege"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-144">
+        <addForeignKeyConstraint baseColumnNames="role" baseTableName="role_privilege" constraintName="role_privilege" deferrable="false" initiallyDeferred="false" referencedColumnNames="role" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-145">
+        <addForeignKeyConstraint baseColumnNames="child_role" baseTableName="role_role" constraintName="inherited_role" deferrable="false" initiallyDeferred="false" referencedColumnNames="role" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-146">
+        <addForeignKeyConstraint baseColumnNames="parent_role" baseTableName="role_role" constraintName="parent_role" deferrable="false" initiallyDeferred="false" referencedColumnNames="role" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-147">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="scheduler_task_config" constraintName="scheduler_changer" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-148">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="scheduler_task_config" constraintName="scheduler_creator" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-149">
+        <addForeignKeyConstraint baseColumnNames="task_config_id" baseTableName="scheduler_task_config_property" constraintName="fk_scheduler_task_config_property_1" deferrable="false" initiallyDeferred="false" referencedColumnNames="task_config_id" referencedTableName="scheduler_task_config"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-150">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_property" constraintName="user_property" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-151">
+        <addForeignKeyConstraint baseColumnNames="role" baseTableName="user_role" constraintName="role_definitions" deferrable="false" initiallyDeferred="false" referencedColumnNames="role" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-152">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="user_role" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-153">
+        <addForeignKeyConstraint baseColumnNames="changed_by" baseTableName="users" constraintName="user_who_changed_user" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-154">
+        <addForeignKeyConstraint baseColumnNames="creator" baseTableName="users" constraintName="user_creator" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-155">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users" constraintName="person_id_for_user" deferrable="false" initiallyDeferred="false" onUpdate="CASCADE" referencedColumnNames="person_id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="Samuel Mbugua" id="openhouse-156">
+        <addForeignKeyConstraint baseColumnNames="voided_by" baseTableName="users" constraintName="user_who_voided_user" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.Databasechangelog" table="DATABASECHANGELOG" catalog="openhouse">
+        <comment></comment>
+        <composite-id name="id" class="org.openhouse.api.database.model.DatabasechangelogId">
+            <key-property name="id" type="string">
+                <column name="ID" length="63" />
+            </key-property>
+            <key-property name="author" type="string">
+                <column name="AUTHOR" length="63" />
+            </key-property>
+            <key-property name="filename" type="string">
+                <column name="FILENAME" length="200" />
+            </key-property>
+        </composite-id>
+        <property name="dateexecuted" type="timestamp">
+            <column name="DATEEXECUTED" length="19" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="md5sum" type="string">
+            <column name="MD5SUM" length="32">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="comments" type="string">
+            <column name="COMMENTS">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="tag" type="string">
+            <column name="TAG">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="liquibase" type="string">
+            <column name="LIQUIBASE" length="10">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

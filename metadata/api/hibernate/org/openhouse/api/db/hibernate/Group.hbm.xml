@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.Group" table="group" catalog="openhouse">
+        <comment></comment>
+        <id name="groupId" type="int">
+            <column name="group_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="groupType" type="java.lang.Integer">
+            <column name="group_type">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="location" type="java.lang.Integer">
+            <column name="location">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="creator" type="java.lang.Integer">
+            <column name="creator">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateCreated" type="timestamp">
+            <column name="date_created" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voided" type="java.lang.Short">
+            <column name="voided">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voidedBy" type="int">
+            <column name="voided_by" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateVoided" type="timestamp">
+            <column name="date_voided" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="voidReason" type="string">
+            <column name="void_reason">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="36" not-null="true" unique="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

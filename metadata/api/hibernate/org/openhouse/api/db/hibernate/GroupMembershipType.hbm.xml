@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.GroupMembershipType" table="group_membership_type" catalog="openhouse">
+        <comment></comment>
+        <id name="groupMembershipTypeId" type="int">
+            <column name="group_membership_type_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="creator" type="int">
+            <column name="creator" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateCreated" type="timestamp">
+            <column name="date_created" length="19" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="uuid" type="string">
+            <column name="uuid" length="36" not-null="true" unique="true">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

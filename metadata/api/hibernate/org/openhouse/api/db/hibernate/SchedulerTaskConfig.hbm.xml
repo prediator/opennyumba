@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping>
+    <class name="org.openhouse.api.database.model.SchedulerTaskConfig" table="scheduler_task_config" catalog="openhouse">
+        <comment></comment>
+        <id name="taskConfigId" type="int">
+            <column name="task_config_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="1024">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="schedulableClass" type="string">
+            <column name="schedulable_class" length="65535">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="start_time" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="startTimePattern" type="string">
+            <column name="start_time_pattern" length="50">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="repeatInterval" type="int">
+            <column name="repeat_interval" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="startOnStartup" type="int">
+            <column name="start_on_startup" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="started" type="int">
+            <column name="started" not-null="true">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateCreated" type="timestamp">
+            <column name="date_created" length="19">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="changedBy" type="java.lang.Integer">
+            <column name="changed_by">
+                <comment></comment>
+            </column>
+        </property>
+        <property name="dateChanged" type="timestamp">
+            <column name="date_changed" length="19">
+                <comment></comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

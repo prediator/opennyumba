@@ -1,0 +1,37 @@
+package org.openxdata.server.security;
+
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.userdetails.User;
+
+/**
+ * Extends the Spring Security User in order to add OpenXData
+ * specific user details (such as the user specific salt).
+ * 
+ * An immutable object (i.e. no setters)
+ *
+ * @author dagmar@cell-life.org.za
+ */
+public class OpenXDataUserDetails extends User {
+    
+    private static final long serialVersionUID = 2323963197126198664L;
+
+    private org.openxdata.server.admin.model.User oxdUser;
+
+    public OpenXDataUserDetails(org.openxdata.server.admin.model.User oxdUser,
+            boolean enabled, boolean accountNonExpired,
+            boolean credentialsNonExpired, boolean accountNonLocked,
+            GrantedAuthority[] authorities) throws IllegalArgumentException {
+    	
+        super(oxdUser.getName(), oxdUser.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
+                accountNonLocked, authorities);
+        this.oxdUser = oxdUser;
+    }
+
+    public String getSalt() {
+        return oxdUser.getSalt();
+    }
+    
+    public org.openxdata.server.admin.model.User getOXDUser() {
+        return oxdUser;
+    }
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<!--
+		So that controllers can use annotations like @Controller and @RequestMapping
+	-->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<!-- makes annotations more important than default mappings -->
+		<property name="order"><value>98</value></property>
+		<property name="interceptors">
+			<list>
+				<!-- allows for locale changes on any annotation based page -->
+				<ref bean="localeChangeInterceptor" />
+				
+				<!-- ensures that password protected pages remains protected -->
+				<ref bean="logonInterceptor"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor" />
+			</list>
+		</property>
+		<property name="order"><value>99</value></property>
+		<property name="mappings">
+			<props>
+				<prop key="**/*.htm">springController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="springController" class="org.openhouse.web.controller.SpringController" />
+	
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName">
+			<value>lang</value>
+		</property>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename">
+            <value>/WEB-INF/messages</value>
+        </property>
+        <property name="defaultEncoding">
+        	<value>UTF-8</value> 
+        </property>
+        <property name="cacheSeconds">
+            <value>1</value>
+        </property>
+    </bean>
+
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="prefix" value="/WEB-INF/view/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <bean id="logonInterceptor" class="org.openhouse.web.LoginInterceptor">
+        <property name="loginPage">
+            <value>redirect:/login.form</value>
+        </property>
+        <property name="urlParameterName">
+            <value>targetUrl</value>
+        </property>
+        <property name="allowedPaths">
+            <list>
+                <value>/login.form</value>
+            </list>
+        </property>
+    </bean>
+    
+    <context:component-scan base-package="org.openhouse" />
+	<context:annotation-config />
+
+</beans>

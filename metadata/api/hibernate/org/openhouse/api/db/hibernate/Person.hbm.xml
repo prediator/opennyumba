@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<hibernate-mapping package="org.openhouse.api.database.model">
+    <class name="Person" table="person" catalog="openhouse">
+        <comment></comment>
+        <id name="personId" type="int">
+            <column name="person_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="personIdentifier" type="string"
+            column="person_identifier" length="30" not-null="true" unique="true"/>
+
+        <property name="remotePersonId" type="java.lang.Integer" column="remote_person_id"/>
+
+        <property name="remotePersonUuid" type="string" column="remote_person_uuid" length="36" not-null="true"/>
+
+        <property name="firstName" type="string" column="first_name" length="50"/>
+        
+        <property name="middleName" type="string" column="middle_name" length="50"/>
+        
+        <property name="lastName" type="string" column="last_name" length="50"/>
+        
+        <property name="gender" type="string" column="gender" length="10"/>
+
+        <property name="birthdate" type="date" column="birthdate" length="10"/>
+
+        <property name="birthdateEstimated" type="boolean" column="birthdate_estimated" not-null="true"/>
+
+        <property name="deathDate" type="timestamp" column="death_date" length="19"/>
+
+        <many-to-one name="personCreator" class="User" column="creator" not-null="true" />
+
+        <property name="personDateCreated" type="timestamp" column="date_created" length="19" not-null="true"/>
+		
+		<many-to-one name="personChangedBy" class="User" column="changed_by" />
+
+        <property name="personDateChanged" type="timestamp" column="date_changed" length="19"/>
+                
+        <property name="personVoided" type="boolean" column="voided" not-null="true"/>
+
+        <many-to-one name="personVoidedBy" class="User" column="voided_by" />
+
+        <property name="personDateVoided" type="timestamp" column="date_voided" length="19"/>
+
+        <property name="personVoidReason" type="string" column="void_reason"/>
+        
+        <property name="user" type="boolean" insert="false" update="false" lazy="true">
+	    	<formula>case when exists (select * from users u where u.user_id = person_id) then 1 else 0 end</formula> 
+	    </property>
+    </class>
+</hibernate-mapping>
