@@ -1,43 +1,29 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated May 6, 2010 12:59:00 PM by Hibernate Tools 3.2.0.b9 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 15, 2010 4:18:25 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="org.openhouse.api.database.model.ConceptSet" table="concept_set" catalog="openhouse">
-        <comment></comment>
-        <id name="conceptSetId" type="int">
-            <column name="concept_set_id" />
-            <generator class="assigned" />
-        </id>
-        <property name="conceptId" type="int">
-            <column name="concept_id" not-null="true">
-                <comment></comment>
-            </column>
-        </property>
-        <property name="conceptSet" type="int">
-            <column name="concept_set" not-null="true">
-                <comment></comment>
-            </column>
-        </property>
-        <property name="sortWeight" type="java.lang.Double">
-            <column name="sort_weight" precision="22" scale="0">
-                <comment></comment>
-            </column>
-        </property>
-        <property name="creator" type="int">
-            <column name="creator" not-null="true">
-                <comment></comment>
-            </column>
-        </property>
-        <property name="dateCreated" type="timestamp">
-            <column name="date_created" length="19" not-null="true">
-                <comment></comment>
-            </column>
-        </property>
-        <property name="uuid" type="string">
-            <column name="uuid" length="36" not-null="true" unique="true">
-                <comment></comment>
-            </column>
-        </property>
-    </class>
+  <class catalog="openhouse" name="org.openhouse.api.db.hibernate.ConceptSet" table="concept_set">
+    <id name="conceptSetId" type="java.lang.Integer">
+      <column name="concept_set_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="org.openhouse.api.db.hibernate.Concept" fetch="select" name="conceptByConceptSet">
+      <column name="concept_set" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.openhouse.api.db.hibernate.Users" fetch="select" name="users">
+      <column name="creator" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="org.openhouse.api.db.hibernate.Concept" fetch="select" name="conceptByConceptId">
+      <column name="concept_id" not-null="true"/>
+    </many-to-one>
+    <property name="sortWeight" type="java.lang.Double">
+      <column name="sort_weight" precision="22" scale="0"/>
+    </property>
+    <property name="dateCreated" type="timestamp">
+      <column length="19" name="date_created" not-null="true"/>
+    </property>
+    <property name="uuid" type="string">
+      <column length="36" name="uuid" not-null="true" unique="true"/>
+    </property>
+  </class>
 </hibernate-mapping>
