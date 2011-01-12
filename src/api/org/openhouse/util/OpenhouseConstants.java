@@ -151,7 +151,17 @@ public class OpenhouseConstants {
 	public static String OPERATING_SYSTEM_LINUX = "Linux";
 	public static String OPERATING_SYSTEM_FREEBSD = "FreeBSD";
 	public static String OPERATING_SYSTEM_OSX = "Mac OS X";
+	public static final String OPERATING_SYSTEM_SUNOS = "SunOS";
 	
+	
+
+	/**
+	 * Shortcut booleans used to make some OS specific checks more generic; note the *nix flavored
+	 * check is missing some less obvious choices
+	 */
+	public static final boolean UNIX_BASED_OPERATING_SYSTEM = (OPERATING_SYSTEM.indexOf(OPERATING_SYSTEM_LINUX) > -1
+	        || OPERATING_SYSTEM.indexOf(OPERATING_SYSTEM_SUNOS) > -1
+	        || OPERATING_SYSTEM.indexOf(OPERATING_SYSTEM_FREEBSD) > -1 || OPERATING_SYSTEM.indexOf(OPERATING_SYSTEM_OSX) > -1);
 	
 	/** The default submit date format. */
 	public static final String DEFAULT_DATE_SUBMIT_FORMAT = "yyyy-MM-dd";//yyyy-mm-dd
@@ -176,6 +186,11 @@ public class OpenhouseConstants {
 	public static final String ANONYMOUS_ROLE = "Anonymous";
 	
 	public static final String AUTHENTICATED_ROLE = "Authenticated";
+
+	public static final String USER_PROPERTY_CHANGE_PASSWORD = "forcePassword";
+
+	public static final String GLOBAL_PROPERTY_CONCEPTS_LOCKED = null;
+
 	
 	/**
 	 * All roles returned by this method are inserted into the database if they do not exist
@@ -192,5 +207,17 @@ public class OpenhouseConstants {
 		roles.put(AUTHENTICATED_ROLE, "Privileges gained once authentication has been established.");
 		
 		return roles;
+	}
+
+
+	public static Map<String, String> CORE_PRIVILEGES() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public static Object CORE_GLOBAL_PROPERTIES() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

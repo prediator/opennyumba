@@ -27,16 +27,25 @@
 	<bean id="transactionAttributeSource" class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
 	
     <!--  **************************  DATA OBJECTS CONFIGURATION  *************************  -->
-	
+	<!--Context database related activities cookie cutter association-->
 	<bean id="contextDAO" class="org.openhouse.api.dao.hibernate.HibernateContextDAO">
 		<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
 	</bean>
-	
+	<!--User database related activities cookie cutter association-->
 	<bean id="userDAO" class="org.openhouse.api.dao.hibernate.HibernateUserDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	
+	<!--Location database related activities cookie cutter association-->
 	<bean id="locationDAO" class="org.openhouse.api.dao.hibernate.HibernateLocationDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!--Person database related activities cookie cutter association-->
+	<bean id="personDAO" class="org.openhouse.api.dao.hibernate.HibernatePersonDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<!--Household database related activities cookie cutter association-->
+	<bean id="householdDAO" class="org.openhouse.api.dao.hibernate.HibernateHouseholdDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
@@ -50,14 +59,16 @@
         <property name="taskService"><ref bean="taskService"/></property>
         <property name="schedulerService"><ref bean="schedulerService"/></property> 
         <property name="authenticationService"><ref bean="authenticationService"/></property>  
-        <property name="locationService"><ref bean="locationService"/></property>      
+        <property name="locationService"><ref bean="locationService"/></property>
+        <property name="personService"><ref bean="personService"/></property>
+		<property name="householdService"><ref bean="householdService"/></property>      
 	</bean>	
 	
 	<bean class="org.openhouse.api.context.Context">
 	    <property name="contextDAO"><ref bean="contextDAO"/></property>
 		<property name="serviceContext"><ref bean="serviceContext"/></property>
 	</bean>
-	
+	<!--Scheduler related operations in the system are handled by this command    -->
 	<bean id="schedulerService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager"/>
 		<property name="target">
@@ -67,9 +78,9 @@
 			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
 		</property>
 	</bean>
-
+	<!--Authentication related operations in the system are handled by this command    -->
 	<bean id="authenticationService" class="org.openhouse.api.service.impl.AuthenticationServiceImpl" />
-	
+	<!--Task related operations in the system are handled by this command    -->
 	<bean id="taskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager"/>
 		<property name="target">
@@ -81,7 +92,7 @@
 			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
 		</property>
 	</bean>
-	
+	<!--User related operations in the system are handled by this command    -->
     <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
        <property name="transactionManager" ref="transactionManager"/>
        <property name="target">
@@ -94,12 +105,36 @@
            <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
        </property>       
     </bean >
-    
+    <!--Location related operations in the system are handled by this command    -->
     <bean id="locationService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
        <property name="transactionManager" ref="transactionManager"/>
        <property name="target">
             <bean class="org.openhouse.api.service.impl.LocationServiceImpl">
                 <property name="dao" ref="locationDAO"/>
+            </bean>
+       </property>
+       <property name="transactionAttributeSource">
+           <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+       </property>       
+    </bean >
+	<!--Person related operations in the system are handled by this command    -->
+    <bean id="personService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+       <property name="transactionManager" ref="transactionManager"/>
+       <property name="target">
+            <bean class="org.openhouse.api.service.impl.PersonServiceImpl">
+                <property name="dao" ref="personDAO"/>
+            </bean>
+       </property>
+       <property name="transactionAttributeSource">
+           <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+       </property>       
+    </bean >
+    <!--Household related operations in the system are handled by this command    -->
+    <bean id="householdService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+       <property name="transactionManager" ref="transactionManager"/>
+       <property name="target">
+            <bean class="org.openhouse.api.service.impl.HouseholdServiceImpl">
+                <property name="dao" ref="householdDAO"/>
             </bean>
        </property>
        <property name="transactionAttributeSource">
@@ -112,7 +147,6 @@
 	</bean>
     
     <!--  **************************  SESSION FACTORY  *************************  -->
-    
     <bean id="sessionFactory" class="org.openhouse.api.dao.hibernate.HibernateSessionFactoryBean" autowire="byType">
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 	</bean>
@@ -123,7 +157,6 @@
 	
 
 	<!--  **************************  TRANSACTION MANAGER CONFIGURATION  *************************  -->
-
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>

@@ -24,7 +24,7 @@
                 <comment></comment>
             </column>
         </property>
-        <property name="creator" type="int">
+        <property name="creator" type="org.openhouse.api.database.model.User">
             <column name="creator" not-null="true">
                 <comment></comment>
             </column>
@@ -34,12 +34,12 @@
                 <comment></comment>
             </column>
         </property>
-        <property name="voided" type="short">
+        <property name="voided" type="boolean">
             <column name="voided" not-null="true">
                 <comment></comment>
             </column>
         </property>
-        <property name="voidedBy" type="java.lang.Integer">
+        <property name="voidedBy" type="org.openhouse.api.database.model.ConceptName">
             <column name="voided_by">
                 <comment></comment>
             </column>

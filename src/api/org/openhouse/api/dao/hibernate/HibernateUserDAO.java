@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.openhouse.api.dao.UserDAO;
 import org.openhouse.api.database.model.Privilege;
+import org.openhouse.api.database.model.Role;
 import org.openhouse.api.database.model.User;
 import org.openhouse.api.exception.OpenHouseException;
 import org.openhouse.util.HibernateUtil;
@@ -68,5 +69,23 @@ public class HibernateUserDAO implements UserDAO {
 	public List<Privilege> getAllPrivileges() {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Privilege.class);
 		return criteria.list();
+	}
+
+	@Override
+	public List<Role> getAllRoles() {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Role.class);
+		return criteria.list();
+	}
+
+	@Override
+	public void savePrivilege(Privilege p) {
+		HibernateUtil.saveItem(p);
+		
+	}
+
+	@Override
+	public void saveRole(Role role) {
+		HibernateUtil.saveItem(role);
+		
 	}
 }

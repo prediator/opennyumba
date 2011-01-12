@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openhouse.api.dao.ContextDAO;
 import org.openhouse.api.dao.UserDAO;
 import org.openhouse.api.database.model.Privilege;
+import org.openhouse.api.database.model.Role;
 import org.openhouse.api.database.model.User;
 import org.openhouse.api.exception.OpenHouseException;
 import org.openhouse.api.exception.OpenHouseSessionExpiredException;
@@ -116,6 +117,24 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Privilege> getAllPrivileges() {
 		return dao.getAllPrivileges();
+	}
+
+	@Override
+	public List<Role> getAllRoles() {
+		// TODO Auto-generated method stub
+		return dao.getAllRoles();
+	}
+
+	@Override
+	public void savePrivilege(Privilege p) {
+		dao.savePrivilege(p);
+		
+	}
+
+	@Override
+	public void saveRole(Role role) {
+		dao.saveRole(role);
+		
 	}
 
 }

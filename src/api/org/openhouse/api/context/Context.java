@@ -12,6 +12,9 @@ import org.openhouse.api.service.AdministrationService;
 import org.openhouse.api.service.AuthenticationService;
 import org.openhouse.api.service.HouseholdService;
 import org.openhouse.api.service.LocationService;
+import org.openhouse.api.service.MessageSourceService;
+import org.openhouse.api.service.ObsService;
+import org.openhouse.api.service.PersonService;
 import org.openhouse.api.service.SchedulerService;
 import org.openhouse.api.service.TaskService;
 import org.openhouse.api.service.UserService;
@@ -215,6 +218,12 @@ public class Context {
 	public static HouseholdService getHouseholdService() {
 		return getServiceContext().getHouseholdService();
 	}
+	public static PersonService getPersonService() {
+		return getServiceContext().getPersonService();
+	}
+	public static ObsService getObsService() {
+		return getServiceContext().getObsService();
+	}
 	
 	public static void openSession(){
 		setUserContext(new UserContext()); // must be cleared out in closeSession()
@@ -352,5 +361,12 @@ public class Context {
 		//reset the UserContext object (usually cleared out by closeSession() soon after this)
 		setUserContext(new UserContext());
 	}
+
+	public static MessageSourceService getMessageSourceService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

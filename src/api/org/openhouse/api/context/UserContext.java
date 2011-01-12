@@ -36,6 +36,9 @@ public class UserContext {
 	 * User object containing details about the authenticated user 
 	 */
 	private User user = null;
+	/**
+	 * 
+	 */
 	
 	private Locale locale;
 	

@@ -11,10 +11,19 @@
 		<mapping resource="org/openhouse/api/db/hibernate/Role.hbm.xml" />
 		<mapping resource="org/openhouse/api/db/hibernate/Person.hbm.xml" />
 		<mapping resource="org/openhouse/api/db/hibernate/Privilege.hbm.xml" />
-		
+
 		<!-- Location Related Mapping Files -->
 		<mapping resource="org/openhouse/api/db/hibernate/Location.hbm.xml" />
 		<mapping resource="org/openhouse/api/db/hibernate/LocationTag.hbm.xml" />
+				
+		<!-- Group Related Mapping Files -->
+		<mapping resource="org/openhouse/api/db/hibernate/Group.hbm.xml" />
+		<mapping resource="org/openhouse/api/db/hibernate/GroupMap.hbm.xml" />
+		<mapping resource="org/openhouse/api/db/hibernate/GroupMapType.hbm.xml" />
+		<mapping resource="org/openhouse/api/db/hibernate/GroupMembership.hbm.xml" />
+		<mapping resource="org/openhouse/api/db/hibernate/GroupMembershipType.hbm.xml" />
+		<mapping resource="org/openhouse/api/db/hibernate/GroupType.hbm.xml" />
+
   </session-factory>
 
 </hibernate-configuration>

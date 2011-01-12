@@ -6,6 +6,7 @@ package org.openhouse.api.dao;
 import java.util.List;
 
 import org.openhouse.api.database.model.Privilege;
+import org.openhouse.api.database.model.Role;
 import org.openhouse.api.database.model.User;
 import org.openhouse.api.exception.OpenHouseException;
 
@@ -31,9 +32,9 @@ public interface UserDAO {
 	 * @param username String
 	 * @return User, or null if no match found
 	 */
-	User getUser(String username) throws OpenHouseException;
+	public User getUser(String username) throws OpenHouseException;
 	
-	User getUser(Integer userId) throws OpenHouseException;
+	public User getUser(Integer userId) throws OpenHouseException;
 	
 	/**
 	 * Saves a user to the database.
@@ -49,7 +50,13 @@ public interface UserDAO {
 	 * @param user the user to remove.
 	 * 
 	 */
-	void deleteUser(User user) throws OpenHouseException;
+	public void deleteUser(User user) throws OpenHouseException;
 
-	List<Privilege> getAllPrivileges();
+	public List<Privilege> getAllPrivileges();
+
+	public List<Role> getAllRoles();
+
+	public void savePrivilege(Privilege p);
+
+	public void saveRole(Role role);
 }

@@ -1,4 +1,9 @@
 package org.openhouse.api.database.model;
+
+import java.util.Map;
+
+import org.openhouse.util.OpenhouseConstants;
+
 // Generated May 6, 2010 12:58:59 PM by Hibernate Tools 3.2.0.b9
 
 
@@ -8,43 +13,70 @@ package org.openhouse.api.database.model;
  */
 public class UserProperty  implements java.io.Serializable {
 
-
-     private UserPropertyId id;
-     private String propertyValue;
-     private String uuid;
-
-    public UserProperty() {
-    }
-
-    public UserProperty(UserPropertyId id, String propertyValue, String uuid) {
-       this.id = id;
-       this.propertyValue = propertyValue;
-       this.uuid = uuid;
-    }
-   
-    public UserPropertyId getId() {
-        return this.id;
-    }
-    
-    public void setId(UserPropertyId id) {
-        this.id = id;
-    }
-    public String getPropertyValue() {
-        return this.propertyValue;
-    }
-    
-    public void setPropertyValue(String propertyValue) {
-        this.propertyValue = propertyValue;
-    }
-    public String getUuid() {
-        return this.uuid;
-    }
-    
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-
+	private Map<String, String> properties;
+	
+	/**
+	 * @param properties map of the user properties
+	 */
+	public UserProperty(Map<String, String> properties) {
+		this.properties = properties;
+	}
+	
+	/**
+	 * Sets the user property which determines if a new user should change his password upon logging
+	 * in the first time.
+	 * 
+	 * @param change decides if the user should be forced to change the password
+	 * @should add forcePassword property in user properties map when value is set to true
+	 * @should do not add forcePassword property in user properties when set to false
+	 * @should remove forcePassword property from user properties when set to false
+	 * @should do not add forcePassword property in user properties when set to null
+	 * @should remove forcePassword property from user properties when set to null
+	 */
+	public void setSupposedToChangePassword(Boolean change) {
+		if ((change == null || !change)) {
+			removeProperty(OpenhouseConstants.USER_PROPERTY_CHANGE_PASSWORD);
+		} else {
+			addProperty(OpenhouseConstants.USER_PROPERTY_CHANGE_PASSWORD, String.valueOf(change));
+		}
+	}
+	
+	/**
+	 * @return the properties
+	 */
+	private Map<String, String> getProperties() {
+		return properties;
+	}
+	
+	/**
+	 * Utility method. Removes the given property from the user's properties
+	 * 
+	 * @param property to be removed.
+	 */
+	private void removeProperty(String property) {
+		if (getProperties().containsKey(property))
+			getProperties().remove(property);
+	}
+	
+	/**
+	 * Utility method. Adds the given property to the user's properties
+	 * 
+	 * @param key of the property
+	 * @param property value
+	 */
+	private void addProperty(String key, String property) {
+		getProperties().put(key, property);
+	}
+	
+	/**
+	 * Method to read the value of forcePassword property
+	 * 
+	 * @return true or false based on the value of forcePassword property
+	 * @should "return true or false depending on the presence or absence of forcePassword key in the user properties"
+	 */
+	public Boolean isSupposedToChangePassword() {
+		return Boolean.valueOf(getProperties().get(OpenhouseConstants.USER_PROPERTY_CHANGE_PASSWORD));
+	}
 
 
 }

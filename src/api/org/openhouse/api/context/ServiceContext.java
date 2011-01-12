@@ -5,6 +5,8 @@ import org.openhouse.api.service.AdministrationService;
 import org.openhouse.api.service.AuthenticationService;
 import org.openhouse.api.service.HouseholdService;
 import org.openhouse.api.service.LocationService;
+import org.openhouse.api.service.ObsService;
+import org.openhouse.api.service.PersonService;
 import org.openhouse.api.service.SchedulerService;
 import org.openhouse.api.service.TaskService;
 import org.openhouse.api.service.UserService;
@@ -22,6 +24,8 @@ public class ServiceContext {
 	private HouseholdService householdService;
 	private AdministrationService administrationService;
 	private LocationService locationService;
+	private PersonService personService;
+	private ObsService obsService;
 	
 
 	/**
@@ -128,4 +132,31 @@ public class ServiceContext {
 	public void setLocationService(LocationService locationService) {
 		this.locationService = locationService;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public PersonService getPersonService() {
+		return personService;
+	}
+	/**
+	 * 
+	 * @param personService
+	 */
+
+	public void setPersonService(PersonService personService) {
+		this.personService = personService;
+	}
+
+	public ObsService getObsService() {
+		return obsService;
+	}
+
+	public void setObsService(ObsService obsService) {
+		this.obsService = obsService;
+	}
+
+
+	
 }

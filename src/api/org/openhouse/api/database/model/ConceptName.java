@@ -14,9 +14,9 @@ public class ConceptName  implements java.io.Serializable {
      private Integer conceptId;
      private String name;
      private String locale;
-     private int creator;
+     private User creator;
      private Date dateCreated;
-     private short voided;
+     private boolean voided;
      private Integer voidedBy;
      private Date dateVoided;
      private String voidReason;
@@ -26,7 +26,7 @@ public class ConceptName  implements java.io.Serializable {
     }
 
 	
-    public ConceptName(int conceptNameId, String name, String locale, int creator, Date dateCreated, short voided, String uuid) {
+    public ConceptName(int conceptNameId, String name, String locale, User creator, Date dateCreated, boolean voided, String uuid) {
         this.conceptNameId = conceptNameId;
         this.name = name;
         this.locale = locale;
@@ -35,7 +35,7 @@ public class ConceptName  implements java.io.Serializable {
         this.voided = voided;
         this.uuid = uuid;
     }
-    public ConceptName(int conceptNameId, Integer conceptId, String name, String locale, int creator, Date dateCreated, short voided, Integer voidedBy, Date dateVoided, String voidReason, String uuid) {
+    public ConceptName(int conceptNameId, Integer conceptId, String name, String locale, User creator, Date dateCreated, boolean voided, Integer voidedBy, Date dateVoided, String voidReason, String uuid) {
        this.conceptNameId = conceptNameId;
        this.conceptId = conceptId;
        this.name = name;
@@ -77,11 +77,11 @@ public class ConceptName  implements java.io.Serializable {
     public void setLocale(String locale) {
         this.locale = locale;
     }
-    public int getCreator() {
+    public User getCreator() {
         return this.creator;
     }
     
-    public void setCreator(int creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
     public Date getDateCreated() {
@@ -91,14 +91,18 @@ public class ConceptName  implements java.io.Serializable {
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
-    public short getVoided() {
-        return this.voided;
-    }
-    
-    public void setVoided(short voided) {
-        this.voided = voided;
-    }
-    public Integer getVoidedBy() {
+
+    public boolean isVoided() {
+		return voided;
+	}
+
+
+	public void setVoided(boolean voided) {
+		this.voided = voided;
+	}
+
+
+	public Integer getVoidedBy() {
         return this.voidedBy;
     }
     
